@@ -24,10 +24,8 @@ export default function TicketDesign() {
       e.stopPropagation();
       console.log("cant validate it all")
     }
-    else{
     setValidated(true);
-    console.log(chamado)
-    }
+    console.log(chamado);
   };
   // manipulando o state object de cada item do formulário a medida que se escreve
   const handleChange = (event) => {
@@ -70,6 +68,7 @@ export default function TicketDesign() {
                 onChange={handleChange}
                 value="0"
                 id='inline-radio-1'
+                required
               />
               <Form.Check
                 inline
@@ -79,6 +78,7 @@ export default function TicketDesign() {
                 onChange={handleChange}
                 value="1"
                 id='inline-radio-2'
+                required
               />
               <Form.Check
                 inline
@@ -88,6 +88,7 @@ export default function TicketDesign() {
                 onChange={handleChange}
                 value="2"
                 id='inline-radio-3'
+                required
               />
               <Form.Check
                 inline
@@ -97,6 +98,7 @@ export default function TicketDesign() {
                 onChange={handleChange}
                 value="3"
                 id='inline-radio-3'
+                required
               />
               <Form.Check
                 inline
@@ -106,6 +108,7 @@ export default function TicketDesign() {
                 onChange={handleChange}
                 value="4"
                 id='inline-radio-3'
+                required
               />
               <Form.Check
                 inline
@@ -115,6 +118,7 @@ export default function TicketDesign() {
                 onChange={handleChange}
                 value="5"
                 id='inline-radio-3'
+                required
               />
               <Form.Text className="text-muted">
               Quanto menor o numero maior a prioridade.
@@ -140,6 +144,7 @@ export default function TicketDesign() {
               key={setor}
               onChange={handleChange}
               value={setor}
+              required
             />
             ))}
             </div>
