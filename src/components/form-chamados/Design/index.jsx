@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import './index.css'
+import axios from 'axios';
 
 export default function TicketDesign() {
 
@@ -11,7 +12,37 @@ export default function TicketDesign() {
     prior: 5,
     titulo: "",
     desc: "",
+    areas: [1],
+    status: "pendente"
   });
+
+  const [token, setToken] = useState('')
+  
+  const loginJWT = async () => {
+    await axios.post('http://127.0.0.1:8000/auth-token/', {
+      username: 'webuser',
+      password: ''
+    })
+    .then(function (response) {
+      setToken(response.data.access)
+    })
+    .catch(function (error) {
+    });
+  }
+  //Criando chamado 
+  const createChamado = async () => {
+    await axios.post('http://127.0.0.1:8000/Chamados/', chamado, {
+      headers: {
+        Authorization: 'Bearer ' + token_auth,
+      }
+    })
+    .then(function (response) {
+      console.log(response)
+    })
+    .catch(function (error) {
+    });
+  }
+
 
   //manipulando após o envio do chamado
   const submitHandle = (e) => {
@@ -21,7 +52,10 @@ export default function TicketDesign() {
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
-      console.log("cant validate it all")
+    }
+    else {
+      loginJWT()
+      createChamado()
     }
     setValidated(true);
     console.log(chamado);
@@ -79,7 +113,7 @@ export default function TicketDesign() {
             </Form.Group>
             <Form.Group className="mb-3" controlId="ControlDescrição">
               <Form.Label>Descrição</Form.Label>
-              <Form.Control as="textarea" rows={3} onChange={handleChange} name="desc" required/>
+              <Form.Control as="textarea" rows={3} onChange={handleChange} name="descricao" required/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicSetor">
           <Form.Label>Setor</Form.Label>
@@ -90,7 +124,7 @@ export default function TicketDesign() {
               'SESMT','Administrativo','Qualidade'].map((setor) => (
               <Form.Check
               label={setor}
-              name="Setores"
+              name="setor"
               type='radio'
               id={setor}
               key={setor}
