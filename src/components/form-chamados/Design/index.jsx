@@ -11,7 +11,6 @@ export default function TicketDesign() {
     prior: 5,
     titulo: "",
     desc: "",
-
   });
 
   //manipulando após o envio do chamado
@@ -60,66 +59,19 @@ export default function TicketDesign() {
           <Form.Group className="mb-3" controlId="formBasicPriority">
           <Form.Label>Prioridade</Form.Label>
             <div key='inline-radio' className="mb-3">
+            {['0', '1','2','3','4','5'].map((prior) => (
               <Form.Check
                 inline
-                label="0"
+                label={prior}
                 name="prior"
                 type='radio'
                 onChange={handleChange}
-                value="0"
-                id='inline-radio-1'
+                value={prior}
+                id='inline-radio'
+                key={prior}
                 required
               />
-              <Form.Check
-                inline
-                label="1"
-                name="prior"
-                type='radio'
-                onChange={handleChange}
-                value="1"
-                id='inline-radio-2'
-                required
-              />
-              <Form.Check
-                inline
-                label="2"
-                name="prior"
-                type='radio'
-                onChange={handleChange}
-                value="2"
-                id='inline-radio-3'
-                required
-              />
-              <Form.Check
-                inline
-                label="3"
-                name="prior"
-                type='radio'
-                onChange={handleChange}
-                value="3"
-                id='inline-radio-3'
-                required
-              />
-              <Form.Check
-                inline
-                label="4"
-                name="prior"
-                type='radio'
-                onChange={handleChange}
-                value="4"
-                id='inline-radio-3'
-                required
-              />
-              <Form.Check
-                inline
-                label="5"
-                name="prior"
-                type='radio'
-                onChange={handleChange}
-                value="5"
-                id='inline-radio-3'
-                required
-              />
+            ))}
               <Form.Text className="text-muted">
               Quanto menor o numero maior a prioridade.
             </Form.Text>
