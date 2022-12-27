@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import './index.css'
+import axios from 'axios';
+import Cookies from 'js-cookie'
 
 export default function TicketTI() {
 
@@ -11,20 +13,50 @@ export default function TicketTI() {
     prior: 5,
     titulo: "",
     desc: "",
+    areas: [1],
+    status: "pendente"
   });
 
+  
+  const loginJWT = async () => {
+    await axios.post('https://api-ticketvision.up.railway.app/auth-token/', {
+      username: 'webuser',
+      password: 'Ticket4359'
+    })
+    .then(function (response) {
+      Cookies.set('auth_token', response.data.access)
+    })
+    .catch(function (error) {
+    });
+  }
+  //Criando chamado 
+  const createChamado = async () => {
+    await axios.post('https://api-ticketvision.up.railway.app/Chamados/', chamado, {
+      headers: {
+        Authorization: 'Bearer ' + Cookies.get('auth_token'),
+      }
+    })
+    .then(function (response) {
+    })
+    .catch(function (error) {
+    });
+  }
+
+
   //manipulando após o envio do chamado
-  const submitHandle = (e) => {
+  const submitHandle = async (e) => {
     e.preventDefault();
 
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
-      console.log("cant validate it all")
+    }
+    else {
+      await loginJWT()
+      createChamado()
     }
     setValidated(true);
-    console.log(chamado);
   };
   // manipulando o state object de cada item do formulário a medida que se escreve
   const handleChange = (event) => {
@@ -39,8 +71,8 @@ export default function TicketTI() {
 
   return (
     <div className='Form-Block-TI px-4 py-4'>
-        <h2 className='title'>Formulário de Abertura de Chamado</h2>
-        <h3>{'> TI'}</h3>
+        <h2 className='title'>Formulário de Solicitação de Atividade</h2>
+        <h3>{'> Marketing'}</h3>
         <Form className='pt-5' noValidate validated={validated} onSubmit={submitHandle}>
 
           <Form.Group className="mb-3" controlId="FormNome">
@@ -79,8 +111,7 @@ export default function TicketTI() {
             </Form.Group>
             <Form.Group className="mb-3" controlId="ControlDescrição">
               <Form.Label>Descrição</Form.Label>
-              <Form.Control as="textarea" rows={3} onChange={handleChange} name="desc" required/>
-              <Form.Control.Feedback type='invalid'>Descreva corretamente seu problema.</Form.Control.Feedback>
+              <Form.Control as="textarea" rows={3} onChange={handleChange} name="descricao" required/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicSetor">
           <Form.Label>Setor</Form.Label>
@@ -91,7 +122,7 @@ export default function TicketTI() {
               'SESMT','Administrativo','Qualidade'].map((setor) => (
               <Form.Check
               label={setor}
-              name="Setores"
+              name="setor"
               type='radio'
               id={setor}
               key={setor}

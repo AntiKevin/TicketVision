@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import './index.css'
 import axios from 'axios';
+import Cookies from 'js-cookie'
 
 export default function TicketDesign() {
 
@@ -12,32 +13,36 @@ export default function TicketDesign() {
     prior: 5,
     titulo: "",
     desc: "",
-    areas: [1],
+    areas: [2],
     status: "pendente"
   });
+  
+  const [isLoading, setIsLoading] = useState(false)
 
-  const [token, setToken] = useState('')
   
   const loginJWT = async () => {
-    await axios.post('http://127.0.0.1:8000/auth-token/', {
+    //set the state of loading for the page
+    setIsLoading(true)
+
+    await axios.post('https://api-ticketvision.up.railway.app/auth-token/', {
       username: 'webuser',
-      password: ''
+      password: 'Ticket4359'
     })
     .then(function (response) {
-      setToken(response.data.access)
+      Cookies.set('auth_token', response.data.access)
     })
     .catch(function (error) {
     });
   }
   //Criando chamado 
   const createChamado = async () => {
-    await axios.post('http://127.0.0.1:8000/Chamados/', chamado, {
+    await axios.post('https://api-ticketvision.up.railway.app/Chamados/', chamado, {
       headers: {
-        Authorization: 'Bearer ' + token_auth,
+        Authorization: 'Bearer ' + Cookies.get('auth_token'),
       }
     })
     .then(function (response) {
-      console.log(response)
+      window.location.reload();
     })
     .catch(function (error) {
     });
@@ -45,7 +50,7 @@ export default function TicketDesign() {
 
 
   //manipulando após o envio do chamado
-  const submitHandle = (e) => {
+  const submitHandle = async (e) => {
     e.preventDefault();
 
     const form = e.currentTarget;
@@ -54,11 +59,10 @@ export default function TicketDesign() {
       e.stopPropagation();
     }
     else {
-      loginJWT()
+      await loginJWT()
       createChamado()
     }
     setValidated(true);
-    console.log(chamado);
   };
   // manipulando o state object de cada item do formulário a medida que se escreve
   const handleChange = (event) => {
@@ -75,6 +79,7 @@ export default function TicketDesign() {
     <div className='Form-Block-TI px-4 py-4'>
         <h2 className='title'>Formulário de Solicitação de Atividade</h2>
         <h3>{'> Marketing'}</h3>
+        {isLoading == false ?(
         <Form className='pt-5' noValidate validated={validated} onSubmit={submitHandle}>
 
           <Form.Group className="mb-3" controlId="FormNome">
@@ -137,6 +142,7 @@ export default function TicketDesign() {
             </Form.Group>
             <Button variant="light" type='submit'>Enviar</Button>{' '}
         </Form>
+        ): (<p>carregando...</p>)}
     </div>
   )
 }
