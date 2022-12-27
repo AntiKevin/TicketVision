@@ -16,9 +16,14 @@ export default function TicketTI() {
     areas: [1],
     status: "pendente"
   });
+  
+  const [isLoading, setIsLoading] = useState(false)
 
   
   const loginJWT = async () => {
+    //set the state of loading for the page
+    setIsLoading(true)
+
     await axios.post('https://api-ticketvision.up.railway.app/auth-token/', {
       username: 'webuser',
       password: 'Ticket4359'
@@ -37,6 +42,7 @@ export default function TicketTI() {
       }
     })
     .then(function (response) {
+      window.location.reload();
     })
     .catch(function (error) {
     });
@@ -73,6 +79,7 @@ export default function TicketTI() {
     <div className='Form-Block-TI px-4 py-4'>
         <h2 className='title'>Formulário de Solicitação de Atividade</h2>
         <h3>{'> Marketing'}</h3>
+        {isLoading == false ?(
         <Form className='pt-5' noValidate validated={validated} onSubmit={submitHandle}>
 
           <Form.Group className="mb-3" controlId="FormNome">
@@ -135,6 +142,7 @@ export default function TicketTI() {
             </Form.Group>
             <Button variant="light" type='submit'>Enviar</Button>{' '}
         </Form>
+        ): (<p>carregando...</p>)}
     </div>
   )
 }
