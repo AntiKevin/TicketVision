@@ -14,7 +14,7 @@ export default function TicketDesign() {
     titulo: "",
     desc: "",
     areas: [2],
-    status: "pendente"
+    status: "pendente",
   });
   
   const [isLoading, setIsLoading] = useState(false)
@@ -41,8 +41,8 @@ export default function TicketDesign() {
         Authorization: 'Bearer ' + Cookies.get('auth_token'),
       }
     })
-    .then(function (response) {
-      window.location.reload();
+    .then(function () {
+      window.location.replace('/enviado');
     })
     .catch(function (error) {
     });

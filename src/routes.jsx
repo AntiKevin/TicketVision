@@ -5,6 +5,7 @@ import React from 'react'
 import HomePage from './pages/Home';
 import ChamadosTI from './pages/Chamados/TI';
 import ChamadosDesign from './pages/Chamados/Design';
+import Enviado from './pages/Chamados/enviado';
 
 export default function Pages() {
   return (
@@ -13,6 +14,7 @@ export default function Pages() {
           <Route path='/chamados/ti' element={<ChamadosTI/>} />
           <Route path='/chamados/design' element={<ChamadosDesign/>} />
           <Route path='/' element={<HomePage/>} />
+          <Route path='/enviado' element={<Enviado/>} />
         </Routes>
       </Router>
     )

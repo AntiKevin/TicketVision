@@ -14,7 +14,7 @@ export default function TicketTI() {
     titulo: "",
     desc: "",
     areas: [1],
-    status: "pendente"
+    status: "pendente",
   });
   
   const [isLoading, setIsLoading] = useState(false)
@@ -41,8 +41,8 @@ export default function TicketTI() {
         Authorization: 'Bearer ' + Cookies.get('auth_token'),
       }
     })
-    .then(function (response) {
-      window.location.reload();
+    .then(function () {
+      window.location.replace('/enviado');
     })
     .catch(function (error) {
     });
