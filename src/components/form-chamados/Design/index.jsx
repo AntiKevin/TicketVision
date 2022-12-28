@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom'
 import './index.css'
 import axios from 'axios';
 import Cookies from 'js-cookie'
@@ -19,6 +20,7 @@ export default function TicketDesign() {
   
   const [isLoading, setIsLoading] = useState(false)
 
+  const navigate = useNavigate()
   
   const loginJWT = async () => {
     //set the state of loading for the page
@@ -42,7 +44,7 @@ export default function TicketDesign() {
       }
     })
     .then(function () {
-      window.location.replace('/enviado');
+      navigate('/enviado')
     })
     .catch(function (error) {
     });
