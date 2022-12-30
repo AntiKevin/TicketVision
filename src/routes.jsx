@@ -12,7 +12,7 @@ export default function Pages() {
       <Router>
         <Routes>
           <Route path='/chamados/ti' element={<ChamadosTI/>} />
-          <Route path='/chamados/design' element={<ChamadosDesign/>} />
+          <Route path='/chamados/marketing' element={<ChamadosDesign/>} />
           <Route path='/' element={<HomePage/>} />
           <Route path='/enviado' element={<Enviado/>} />
         </Routes>
