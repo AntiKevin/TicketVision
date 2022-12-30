@@ -10,7 +10,7 @@ export default function HomePage() {
       <Col md="auto" className='mt-5 text-white main-col'>
       {[
         'TI',
-        'Design',
+        'Marketing',
       ].map((area) => (
       <Link to={"/chamados/"+area} key={area}>
         <Row key={area}className="justify-content-md-center">
