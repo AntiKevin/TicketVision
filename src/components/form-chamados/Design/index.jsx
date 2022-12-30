@@ -128,7 +128,7 @@ export default function TicketDesign() {
 
             {['Engenharia', 'Topografia','Obras',
               'Comercial','Diretoria','Sala Técnica',
-              'SESMT','Administrativo','Qualidade'].map((setor) => (
+              'SESMT','Administrativo','Qualidade','TI'].map((setor) => (
               <Form.Check
               label={setor}
               name="setor"

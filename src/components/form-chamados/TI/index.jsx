@@ -79,8 +79,8 @@ export default function TicketTI() {
 
   return (
     <div className='Form-Block-TI px-4 py-4'>
-        <h2 className='title'>Formulário de Solicitação de Atividade</h2>
-        <h3>{'> Marketing'}</h3>
+        <h2 className='title'>Formulário de Criação de Chamado</h2>
+        <h3>{'> TI'}</h3>
         {isLoading == false ?(
         <Form className='pt-5' noValidate validated={validated} onSubmit={submitHandle}>
 
