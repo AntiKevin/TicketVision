@@ -126,9 +126,8 @@ export default function TicketDesign() {
           <Form.Label>Setor</Form.Label>
             <div key='inline-radio' className="mb-3">
 
-            {['Engenharia', 'Topografia','Obras',
-              'Comercial','Diretoria','Sala Técnica',
-              'SESMT','Administrativo','Qualidade','TI'].map((setor) => (
+            {['Conselho','Engenharia','Topografia','Obras','Comercial','TI',
+              'Diretoria','Sala Técnica','SESMT','Administrativo','Qualidade'].map((setor) => (
               <Form.Check
               label={setor}
               name="setor"
