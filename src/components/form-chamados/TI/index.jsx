@@ -38,7 +38,7 @@ export default function TicketTI() {
   }
   //Criando chamado 
   const createChamado = async () => {
-    await axios.post('https://api-ticketvision.up.railway.app/Chamados/', chamado, {
+    await axios.post('https://api-ticketvision.up.railway.app/chamados/', chamado, {
       headers: {
         Authorization: 'Bearer ' + Cookies.get('auth_token'),
       }
